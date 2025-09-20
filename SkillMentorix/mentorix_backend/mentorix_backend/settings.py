@@ -40,8 +40,10 @@ INSTALLED_APPS = [
 ]
 
 EXTERNAL_APPS = [
+    'rest_framework',
+    'corsheaders',
     'accounts',
-    'league'
+    'league',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
@@ -49,6 +51,7 @@ INSTALLED_APPS += EXTERNAL_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -81,8 +84,12 @@ WSGI_APPLICATION = 'mentorix_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'SkillMentorix',    # your DB name
+        'USER': 'root',                # your MySQL user
+        'PASSWORD': 'spartans@123',    # your MySQL password
+        'HOST': 'localhost',           # DB host
+        'PORT': '3306',                # default MySQL port
     }
 }
 
@@ -127,3 +134,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
